@@ -4,6 +4,7 @@ import dash_bootstrap_components as dbc
 from flask_login import logout_user, current_user
 from flask import redirect
 from app import app, server
+import os
 
 # Importar todas las páginas
 from pages import login, dashboard, jugadores_similares, rendimiento_defensivo, rendimiento_ofensivo, creacion_juego, analisis_superacion
@@ -64,4 +65,11 @@ def display_page(pathname):
 
 # Ejecutar la aplicación
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    # Para desarrollo local:
+    if 'RENDER' not in os.environ:
+        app.run_server(debug=True)
+    # Para Render:
+    else:
+        # Usa el puerto que Render proporciona y escucha en '0.0.0.0'
+        port = int(os.environ.get('PORT', 8080))
+        app.run_server(host='0.0.0.0', port=port)
