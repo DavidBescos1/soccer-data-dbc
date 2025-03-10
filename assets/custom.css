@@ -1,0 +1,465 @@
+:root {
+    --background-color: #000000;
+    --primary-color: #00BFFF;     /* Azul cian */
+    --secondary-color: #FFFF00;   /* Amarillo brillante */
+    --text-color: #FFFFFF;        /* Blanco */
+    --dark-accent: #1A1A1A;       /* Negro más claro para contraste */
+    --hover-color: #00A0D6;       /* Azul cian más oscuro para hover */
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Asegurar que todo el texto sea blanco */
+p, h1, h2, h3, h4, h5, h6, div, span, li, td, th {
+    color: white !important;
+}
+
+/* Excepciones para elementos específicos */
+.login-button, .dashboard-card-value {
+    color: inherit !important;
+}
+
+/* Permitir que los mensajes de error mantengan su color */
+.dash-error, .error-container, .error-message, .alert-danger, [class*="error"],
+div[role="alert"], .has-danger, .invalid-feedback, .Toastify__toast--error {
+    color: #FF6B6B !important;
+}
+
+/* Estilos para Login */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--background-color);
+}
+
+.login-card {
+    background-color: var(--dark-accent);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
+    width: 400px;
+    padding: 30px;
+    text-align: center;
+}
+
+.login-logo {
+    margin-bottom: 30px;
+}
+
+.login-title {
+    color: var(--primary-color);
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.login-input {
+    background-color: #2a2a2a;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    padding: 12px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.login-input:focus {
+    border: 1px solid var(--secondary-color);
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 255, 0, 0.5);
+}
+
+.login-button {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    color: var(--background-color);
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+    padding: 12px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: var(--secondary-color);
+    color: var(--background-color);
+}
+
+.login-error {
+    color: #FF6B6B;
+    margin-top: 15px;
+}
+
+/* Estilos para Dashboard y navegación principal */
+.sidebar {
+    background-color: var(--dark-accent);
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.app-logo {
+    text-align: center;
+    padding: 10px 0 30px 0;
+}
+
+.app-logo h1 {
+    color: #00BFFF !important;
+    font-size: 24px;
+    margin: 0;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item {
+    padding: 0;
+}
+
+.nav-link {
+    color: #00BFFF !important;
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.nav-link:hover, .nav-link.active {
+    background-color: rgba(0, 191, 255, 0.1);
+    border-left: 3px solid var(--secondary-color);
+}
+
+.nav-link i {
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+.content-container {
+    margin-left: 250px;
+    padding: 20px;
+}
+
+/* Dashboard cards */
+.dashboard-card {
+    background-color: var(--dark-accent);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 191, 255, 0.2);
+}
+
+.dashboard-card-title {
+    color: var(--primary-color);
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.dashboard-card-value {
+    color: var(--secondary-color);
+    font-size: 32px;
+    font-weight: bold;
+}
+
+/* Estilos para gráficos */
+.graph-container {
+    background-color: var(--dark-accent);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para filtros */
+.filter-container {
+    background-color: var(--dark-accent);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.filter-title {
+    color: var(--primary-color);
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.filter-dropdown .Select-control {
+    background-color: #2a2a2a;
+    border: 1px solid var(--primary-color);
+    color: var(--text-color);
+}
+
+.filter-dropdown .Select-menu-outer {
+    background-color: #2a2a2a;
+    border: 1px solid var(--primary-color);
+}
+
+.filter-dropdown .Select-option {
+    background-color: #2a2a2a;
+    color: var(--text-color);
+}
+
+.filter-dropdown .Select-option.is-selected {
+    background-color: var(--primary-color);
+}
+
+.filter-dropdown .Select-option.is-focused {
+    background-color: rgba(0, 191, 255, 0.2);
+}
+
+/* Tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    padding: 12px;
+    text-align: left;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #333;
+}
+
+tr:hover {
+    background-color: rgba(0, 191, 255, 0.1);
+}
+
+/* Estilos para logos de ligas */
+.leagues-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.league-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: grayscale(50%);
+    transition: all 0.3s ease;
+}
+
+.league-logo:hover {
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Personalización de sliders */
+.rc-slider-track {
+    background-color: var(--primary-color);
+}
+
+.rc-slider-handle {
+    border: solid 2px var(--primary-color);
+    background-color: var(--secondary-color);
+}
+
+.rc-slider-handle:hover {
+    border-color: var(--secondary-color);
+}
+
+.rc-slider-handle:active {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 5px var(--secondary-color);
+}
+
+.rc-slider-mark-text {
+    color: var(--text-color) !important;
+}
+
+.rc-slider-dot {
+    border: 2px solid var(--primary-color);
+    background-color: var(--background-color);
+}
+
+.rc-slider-dot-active {
+    border-color: var(--secondary-color);
+}
+
+/* Adaptación para móviles */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    
+    .content-container {
+        margin-left: 0;
+    }
+    
+    .dashboard-card {
+        margin-bottom: 15px;
+    }
+}
+
+/* Mejorar visibilidad de listas desplegables */
+.Select-value-label {
+    color: black !important;
+}
+
+.Select input {
+    color: black !important;
+}
+
+/* Personalización de checkboxes */
+input[type="checkbox"] {
+    accent-color: var(--primary-color);
+    width: 18px;
+    height: 18px;
+}
+
+/* Hacer más visibles los botones en hover */
+button:hover {
+    filter: brightness(120%);
+    box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+}
+
+/* Mejorar contraste en gráficos */
+.js-plotly-plot .plotly .main-svg {
+    background-color: transparent !important;
+}
+
+.js-plotly-plot .plotly .bg {
+    fill: transparent !important;
+}
+
+/* Personalización de mensajes de error */
+.error-message {
+    color: #FF6B6B !important;
+    background-color: rgba(255, 107, 107, 0.1);
+    border-left: 3px solid #FF6B6B;
+    padding: 10px 15px;
+    margin: 10px 0;
+    border-radius: 0 4px 4px 0;
+}
+
+/* Destacar elementos activos */
+.active, .selected {
+    border-color: var(--secondary-color) !important;
+    background-color: rgba(0, 191, 255, 0.2) !important;
+}
+
+/* Hacer más visible el texto en tooltips */
+.dash-tooltip {
+    background-color: var(--dark-accent) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--primary-color) !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Mensajes de error de Dash */
+._dash-loading {
+    color: var(--primary-color) !important;
+}
+
+.dash-debug-menu {
+    background-color: var(--dark-accent) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--primary-color) !important;
+}
+
+/* Estilos para tarjetas de error visibles */
+.dash-error-card {
+    background-color: rgba(255, 107, 107, 0.1) !important;
+    border: 1px solid #FF6B6B !important;
+    color: #FF6B6B !important;
+}
+
+.dash-error-card * {
+    color: #FF6B6B !important;
+}
+
+.dash-error-card pre, .dash-error-card code {
+    background-color: rgba(255, 107, 107, 0.05) !important;
+    color: #FF6B6B !important;
+}
+
+/* Error popovers */
+.error-popover {
+    color: #FF6B6B !important;
+    background-color: var(--dark-accent) !important;
+    border: 1px solid #FF6B6B !important;
+}
+
+.error-popover * {
+    color: #FF6B6B !important;
+}
+
+/* Botón cerrar errores */
+.close-button {
+    color: white !important;
+    background-color: transparent !important;
+}
+
+/* Mejora contraste para mensajes generales */
+.alert {
+    background-color: var(--dark-accent) !important;
+    border-radius: 5px !important;
+    margin: 10px 0 !important;
+}
+
+.alert-info {
+    border-left: 3px solid var(--primary-color) !important;
+    color: var(--primary-color) !important;
+}
+
+.alert-success {
+    border-left: 3px solid #4BB543 !important;
+    color: #4BB543 !important;
+}
+
+.alert-warning {
+    border-left: 3px solid #FFC107 !important;
+    color: #FFC107 !important;
+}
+
+.alert-danger {
+    border-left: 3px solid #FF6B6B !important;
+    color: #FF6B6B !important;
+}
