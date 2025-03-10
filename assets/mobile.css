@@ -1,81 +1,70 @@
 /* Ajustes específicos para dispositivos móviles */
 @media (max-width: 768px) {
-    /* Hacer todos los contenedores más anchos */
-    .content-container {
-      width: 100% !important;
-      padding: 5px !important;
-    }
-    
-    /* Ajustar gráficos para que sean responsivos */
-    .graph-container {
-      width: 100% !important;
-      overflow-x: auto;
-    }
-    
-    /* Ajustar dropdowns y controles */
-    .filter-dropdown, .filter-slider {
-      width: 100% !important;
-    }
-    
-    /* Hacer tablas scrollables horizontalmente */
-    table {
-      display: block;
-      overflow-x: auto;
-      white-space: nowrap;
-    }
-  
-    /* NUEVOS AJUSTES PARA MEJORAR VISUALIZACIÓN MOBILE */
-    
-    /* Hacer que cada filtro ocupe una línea completa */
-    .filter-container .row .col {
-      width: 100% !important;
+    /* Forzar que todas las columnas de Bootstrap ocupen el ancho completo */
+    .row .col, 
+    .row [class*="col-"] {
       flex: 0 0 100% !important;
       max-width: 100% !important;
+      width: 100% !important;
       margin-bottom: 15px !important;
     }
     
-    /* Gráficos del dashboard en una sola columna */
-    #dashboard-content .row .col {
+    /* Convertir las filas de Bootstrap en columnas */
+    .row {
+      flex-direction: column !important;
+    }
+    
+    /* Estirar todos los controles al ancho completo */
+    .filter-dropdown, 
+    .filter-slider,
+    .Select,
+    input,
+    button,
+    .rc-slider {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+    
+    /* Dashboard: forzar que cada gráfico ocupe una fila completa */
+    #dashboard-content .col,
+    .graph-container {
       width: 100% !important;
       flex: 0 0 100% !important;
       max-width: 100% !important;
       margin-bottom: 20px !important;
     }
     
-    /* Mejorar visualización de la tarjeta de jugador */
-    #jugador-base-info > div {
-      display: flex !important;
-      flex-direction: column !important;
-    }
-    
-    /* La imagen y la información del jugador en columnas separadas */
+    /* Tarjeta del jugador en formato vertical */
     #jugador-base-info > div > div {
       width: 100% !important;
       float: none !important;
+      text-align: center !important;
+      margin-bottom: 15px !important;
     }
     
-    /* La imagen centrada */
-    #jugador-base-info img {
-      margin: 0 auto 15px auto !important;
+    /* Tablas con scroll horizontal */
+    table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
     }
     
-    /* Ajustar el espaciado entre secciones */
-    .mb-4 {
+    /* Incrementar espaciado para mejor legibilidad */
+    .filter-title {
+      margin-top: 15px !important;
+      font-size: 1.1rem !important;
+    }
+    
+    /* Botones más grandes y a ancho completo */
+    .login-button {
+      width: 100% !important;
+      padding: 12px 0 !important;
+      margin-top: 20px !important;
+    }
+    
+    /* Añadir más espacio entre secciones */
+    .mb-4, .mt-4 {
+      margin-top: 2rem !important;
       margin-bottom: 2rem !important;
-    }
-    
-    /* Asegurar que la tarjeta del jugador sea visible */
-    #jugador-base-info[style*="display: block"] {
-      display: block !important;
-    }
-    
-    /* Mejorar apariencia de los controles de ponderación */
-    #ponderaciones-container .row .col:first-child {
-      width: 100% !important;
-    }
-    
-    #ponderaciones-container .row .col:last-child {
-      width: 100% !important;
-      margin-bottom: 10px !important;
     }
   }
