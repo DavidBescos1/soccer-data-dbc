@@ -1,0 +1,25 @@
+@media (max-width: 768px) {
+    /* Hacer todos los contenedores más anchos */
+    .content-container {
+      width: 100% !important;
+      padding: 5px !important;
+    }
+    
+    /* Ajustar gráficos para que sean responsivos */
+    .graph-container {
+      width: 100% !important;
+      overflow-x: auto;
+    }
+    
+    /* Ajustar dropdowns y controles */
+    .filter-dropdown, .filter-slider {
+      width: 100% !important;
+    }
+    
+    /* Hacer tablas scrollables horizontalmente */
+    table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+  }
