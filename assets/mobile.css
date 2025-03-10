@@ -1,3 +1,4 @@
+/* Ajustes específicos para dispositivos móviles */
 @media (max-width: 768px) {
     /* Hacer todos los contenedores más anchos */
     .content-container {
@@ -21,5 +22,60 @@
       display: block;
       overflow-x: auto;
       white-space: nowrap;
+    }
+  
+    /* NUEVOS AJUSTES PARA MEJORAR VISUALIZACIÓN MOBILE */
+    
+    /* Hacer que cada filtro ocupe una línea completa */
+    .filter-container .row .col {
+      width: 100% !important;
+      flex: 0 0 100% !important;
+      max-width: 100% !important;
+      margin-bottom: 15px !important;
+    }
+    
+    /* Gráficos del dashboard en una sola columna */
+    #dashboard-content .row .col {
+      width: 100% !important;
+      flex: 0 0 100% !important;
+      max-width: 100% !important;
+      margin-bottom: 20px !important;
+    }
+    
+    /* Mejorar visualización de la tarjeta de jugador */
+    #jugador-base-info > div {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    
+    /* La imagen y la información del jugador en columnas separadas */
+    #jugador-base-info > div > div {
+      width: 100% !important;
+      float: none !important;
+    }
+    
+    /* La imagen centrada */
+    #jugador-base-info img {
+      margin: 0 auto 15px auto !important;
+    }
+    
+    /* Ajustar el espaciado entre secciones */
+    .mb-4 {
+      margin-bottom: 2rem !important;
+    }
+    
+    /* Asegurar que la tarjeta del jugador sea visible */
+    #jugador-base-info[style*="display: block"] {
+      display: block !important;
+    }
+    
+    /* Mejorar apariencia de los controles de ponderación */
+    #ponderaciones-container .row .col:first-child {
+      width: 100% !important;
+    }
+    
+    #ponderaciones-container .row .col:last-child {
+      width: 100% !important;
+      margin-bottom: 10px !important;
     }
   }
