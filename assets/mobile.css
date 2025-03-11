@@ -3,15 +3,15 @@
     /* Forzar que todas las columnas de Bootstrap ocupen el ancho completo */
     .row .col, 
     .row [class*="col-"] {
-      flex: 0 0 100% !important;
-      max-width: 100% !important;
-      width: 100% !important;
-      margin-bottom: 15px !important;
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        margin-bottom: 15px !important;
     }
     
     /* Convertir las filas de Bootstrap en columnas */
     .row {
-      flex-direction: column !important;
+        flex-direction: column !important;
     }
     
     /* Estirar todos los controles al ancho completo */
@@ -21,50 +21,101 @@
     input,
     button,
     .rc-slider {
-      width: 100% !important;
-      max-width: 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
     }
     
     /* Dashboard: forzar que cada gráfico ocupe una fila completa */
     #dashboard-content .col,
     .graph-container {
-      width: 100% !important;
-      flex: 0 0 100% !important;
-      max-width: 100% !important;
-      margin-bottom: 20px !important;
+        width: 100% !important;
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        margin-bottom: 20px !important;
     }
     
     /* Tarjeta del jugador en formato vertical */
     #jugador-base-info > div > div {
-      width: 100% !important;
-      float: none !important;
-      text-align: center !important;
-      margin-bottom: 15px !important;
+        width: 100% !important;
+        float: none !important;
+        text-align: center !important;
+        margin-bottom: 15px !important;
     }
     
     /* Tablas con scroll horizontal */
     table {
-      display: block;
-      overflow-x: auto;
-      white-space: nowrap;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
     }
     
     /* Incrementar espaciado para mejor legibilidad */
     .filter-title {
-      margin-top: 15px !important;
-      font-size: 1.1rem !important;
+        margin-top: 15px !important;
+        font-size: 1.1rem !important;
     }
     
     /* Botones más grandes y a ancho completo */
     .login-button {
-      width: 100% !important;
-      padding: 12px 0 !important;
-      margin-top: 20px !important;
+        width: 100% !important;
+        padding: 12px 0 !important;
+        margin-top: 20px !important;
     }
     
     /* Añadir más espacio entre secciones */
     .mb-4, .mt-4 {
-      margin-top: 2rem !important;
-      margin-bottom: 2rem !important;
+        margin-top: 2rem !important;
+        margin-bottom: 2rem !important;
     }
-  }
+
+    /* NUEVOS ESTILOS PARA INDICADORES DE CARGA */
+    
+    /* Estilo para botones en estado de carga */
+    button.loading {
+        background-color: #333 !important;
+        color: white !important;
+        cursor: wait !important;
+    }
+    
+    /* Indicador de carga para la página entera */
+    body.page-loading::after {
+        content: "Cargando...";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+        z-index: 9999;
+    }
+    
+    /* Mejorar la respuesta táctil */
+    a, button, .Select-control {
+        -webkit-tap-highlight-color: rgba(0, 191, 255, 0.3);
+    }
+    
+    /* Agregar animación de carga a dropdowns */
+    .Select.is-loading .Select-control::after {
+        content: "";
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        width: 15px;
+        height: 15px;
+        margin-top: -7px;
+        border: 2px solid #ccc;
+        border-top-color: #00BFFF;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+}
