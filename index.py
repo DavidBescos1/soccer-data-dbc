@@ -7,7 +7,7 @@ from app import app, server
 import os
 
 # Importar todas las páginas
-from pages import login, dashboard, jugadores_similares, rendimiento_defensivo, rendimiento_ofensivo, creacion_juego, analisis_superacion
+from pages import login, dashboard, jugadores_similares, rendimiento_defensivo, rendimiento_ofensivo, creacion_juego, analisis_superacion, nutricion_jugadores
 
 # Diccionario de páginas disponibles
 pages = {
@@ -17,7 +17,8 @@ pages = {
     '/rendimiento-defensivo': rendimiento_defensivo.layout,
     '/rendimiento-ofensivo': rendimiento_ofensivo.layout,
     '/creacion-juego': creacion_juego.layout,
-    '/analisis-superacion': analisis_superacion.layout
+    '/analisis-superacion': analisis_superacion.layout,
+    '/nutricion-jugadores': nutricion_jugadores.layout 
 }
 
 # Layout principal de la aplicación

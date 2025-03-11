@@ -8,11 +8,13 @@ class DataManager:
     """
     _instance = None
     _data = None
+    _nutrition_data = None  # Nueva variable para datos de nutrición
 
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super(DataManager, cls).__new__(cls)
             cls._instance._load_data()
+            cls._instance._load_nutrition_data()  # Cargar datos de nutrición
         return cls._instance
 
     def _load_data(self):
@@ -48,7 +50,7 @@ class DataManager:
                 print("Buscando archivos CSV alternativos en la carpeta data...")
                 if os.path.exists(data_dir):
                     for file in os.listdir(data_dir):
-                        if file.endswith('.csv'):
+                        if file.endswith('.csv') and file != 'nutricion_jugadores.csv':  # Excluir el archivo de nutrición
                             alt_path = os.path.join(data_dir, file)
                             print(f"Usando archivo CSV alternativo: {alt_path}")
                             df_alt = pd.read_csv(alt_path)
@@ -115,6 +117,40 @@ class DataManager:
             })
             print("Se han cargado datos de ejemplo debido al error.")
 
+    def _load_nutrition_data(self):
+        """
+        Carga los datos de nutrición del archivo CSV.
+        """
+        try:
+            # Ruta al archivo de nutrición
+            data_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data')
+            nutrition_path = os.path.join(data_dir, 'nutricion_jugadores.csv')
+            
+            if os.path.exists(nutrition_path):
+                print(f"Cargando datos de nutrición desde: {nutrition_path}")
+                self._nutrition_data = pd.read_csv(nutrition_path)
+                
+                # Limpiar espacios en los nombres de las columnas
+                self._nutrition_data.columns = [col.strip() if isinstance(col, str) else col for col in self._nutrition_data.columns]
+                
+                # Mostrar las columnas para depuración
+                print("Columnas en el archivo de nutrición (después de limpiar espacios):")
+                for col in self._nutrition_data.columns:
+                    print(f"  - '{col}'")
+                
+                # Realizar limpieza básica de datos
+                self._clean_nutrition_data()
+                
+                print(f"Datos de nutrición cargados exitosamente: {len(self._nutrition_data)} registros.")
+            else:
+                print(f"Archivo de nutrición no encontrado: {nutrition_path}")
+                self._nutrition_data = pd.DataFrame()
+                
+        except Exception as e:
+            print(f"Error al cargar los datos de nutrición: {e}")
+            self._nutrition_data = pd.DataFrame()
+            print("No se han podido cargar los datos de nutrición.")
+
     def _clean_data(self):
         """
         Realiza la limpieza y preparación de los datos.
@@ -130,55 +166,91 @@ class DataManager:
         for col in numeric_cols:
             self._data[col] = pd.to_numeric(self._data[col], errors='coerce')
 
+    def _clean_nutrition_data(self):
+        """
+        Realiza la limpieza y preparación de los datos de nutrición.
+        """
+        if self._nutrition_data is None or self._nutrition_data.empty:
+            return
+        
+        # Eliminar filas con todos los valores NaN
+        self._nutrition_data = self._nutrition_data.dropna(how='all')
+        
+        # Asegurar que las métricas numéricas sean de tipo float
+        numeric_cols = self._nutrition_data.select_dtypes(include=['int', 'float']).columns
+        for col in numeric_cols:
+            self._nutrition_data[col] = pd.to_numeric(self._nutrition_data[col], errors='coerce')
+
     def get_data(self):
         """
         Retorna el DataFrame completo.
         """
         return self._data.copy() if self._data is not None else pd.DataFrame()
+    
+    def get_nutrition_data(self):
+        """
+        Retorna el DataFrame de nutrición completo.
+        """
+        return self._nutrition_data.copy() if self._nutrition_data is not None else pd.DataFrame()
 
-    def get_unique_values(self, column):
+    def get_unique_values(self, column, nutrition=False):
         """
         Retorna los valores únicos de una columna específica.
+        
+        Args:
+            column (str): Nombre de la columna
+            nutrition (bool): Si es True, busca la columna en los datos de nutrición
         """
-        if self._data is None or column not in self._data.columns:
+        df = self._nutrition_data if nutrition else self._data
+        
+        if df is None or df.empty or column not in df.columns:
             print(f"Columna '{column}' no encontrada en get_unique_values")
             # Intentar buscar columna con espacios
             column_strip = column.strip()
-            for col in self._data.columns:
+            for col in df.columns if df is not None and not df.empty else []:
                 if col.strip() == column_strip:
                     print(f"Usando columna '{col}' en lugar de '{column}'")
-                    return sorted(self._data[col].dropna().unique().tolist())
+                    return sorted(df[col].dropna().unique().tolist())
             return []
-        return sorted(self._data[column].dropna().unique().tolist())
+        return sorted(df[column].dropna().unique().tolist())
     
-    def get_player_data(self, player_name):
+    def get_player_data(self, player_name, nutrition=False):
         """
         Retorna los datos de un jugador específico.
+        
+        Args:
+            player_name (str): Nombre del jugador
+            nutrition (bool): Si es True, busca en los datos de nutrición
         """
-        if self._data is None or not player_name:
+        df = self._nutrition_data if nutrition else self._data
+        
+        if df is None or df.empty or not player_name:
             return pd.DataFrame()
         
-        if 'NOMBRE' not in self._data.columns:
+        if 'NOMBRE' not in df.columns:
             print("Error crítico: columna 'NOMBRE' no disponible en get_player_data")
             return pd.DataFrame()
             
-        return self._data[self._data['NOMBRE'] == player_name]
+        return df[df['NOMBRE'] == player_name]
     
-    def get_filtered_data(self, filters=None):
+    def get_filtered_data(self, filters=None, nutrition=False):
         """
         Retorna los datos filtrados según los criterios especificados.
         
         Args:
             filters (dict): Diccionario con los filtros a aplicar.
                             Formato: {columna: valor} o {columna: [valor1, valor2, ...]}
+            nutrition (bool): Si es True, aplica los filtros a los datos de nutrición
         """
-        if self._data is None:
+        df = self._nutrition_data if nutrition else self._data
+        
+        if df is None or df.empty:
             return pd.DataFrame()
         
         if not filters:
-            return self._data.copy()
+            return df.copy()
         
-        filtered_data = self._data.copy()
+        filtered_data = df.copy()
         
         for column, value in filters.items():
             if column in filtered_data.columns:

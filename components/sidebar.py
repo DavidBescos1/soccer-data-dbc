@@ -77,6 +77,17 @@ def create_sidebar():
                             )
                         ]
                     ),
+                    # Nueva página de Nutrición
+                    html.Li(
+                        className="nav-item",
+                        children=[
+                            dcc.Link(
+                                [html.I(className="fas fa-apple-alt"), " Nutrición Jugadores"],
+                                href="/nutricion-jugadores",
+                                className="nav-link"
+                            )
+                        ]
+                    ),
                     html.Li(
                         className="nav-item",
                         children=[
